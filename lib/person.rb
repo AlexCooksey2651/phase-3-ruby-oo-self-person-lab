@@ -14,6 +14,10 @@ class Person
     def happiness=(value)
         if value <= 10 && value >= 0
             @happiness = value
+        elsif value > 10 
+            @happiness = 10
+        elsif value < 0 
+            @happiness = 0
         end
     end
 
@@ -24,8 +28,10 @@ class Person
     def hygiene=(value)
         if value <= 10 && value >= 0
             @hygiene = value
-        else 
-            @hygiene = self.hygiene
+        elsif value > 10 
+            @hygiene = 10
+        elsif value < 0 
+            @hygiene = 0
         end
     end
 
@@ -47,26 +53,14 @@ class Person
     end
     
     def take_bath
-        if self.hygiene <= 6
-            self.hygiene += 4
-        else
-            self.hygiene = 10
-        end
+        self.hygiene=(self.hygiene + 4)
         "♪ Rub-a-dub just relaxing in the tub ♫"
     end
 
     def work_out
-        if self.happiness <= 8
-            self.happiness += 2
-        else 
-            self.happiness = 10
-        end
+        self.happiness=(self.happiness + 2)
 
-        if self.hygiene >= 3
-            self.hygiene -= 3
-        else
-            self.hygiene = 0
-        end
+        self.hygiene=(self.hygiene - 3)
         "♪ another one bites the dust ♫"
     end
     
@@ -79,16 +73,8 @@ class Person
     def start_conversation(friend, topic)
         case topic
         when "politics"
-            if self.happiness >= 2 
-                self.happiness -= 2
-            else
-                self.happiness = 0
-            end
-            if friend.happiness >=2
-                friend.happiness -= 2
-            else 
-                friend.happiness = 0
-            end
+            self.happiness=(self.happiness - 2)
+            friend.happiness=(friend.happiness - 2)
             "blah blah partisan blah lobbyist"
         when "weather"
             self.happiness += 1
